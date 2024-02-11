@@ -58,17 +58,19 @@ async function handleTouchMove(evt) {
     }
   } else {
     if ( yDiff > 0 ) {
-      if (!canMoveDown()) {
-        setupInputOnce();
-        return;
-      }
-      await moveDown();
-    } else {
       if (!canMoveUp()) {
         setupInputOnce();
         return;
       }
       await moveUp();
+
+
+    } else {
+      if (!canMoveDown()) {
+        setupInputOnce();
+        return;
+      }
+      await moveDown();
     }
   }
   /* reset values */
