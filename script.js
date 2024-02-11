@@ -71,11 +71,16 @@ async function handleTouchMove(evt) {
         return;
       }
       await moveDown();
+      
     }
   }
+  const newTile = new Tile(gameBoard);
+  grid.getRandomEmptyCell().linkTile(newTile);
   /* reset values */
   xDown = null;
   yDown = null;
+
+
 };
 
 
