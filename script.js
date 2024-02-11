@@ -49,11 +49,7 @@ async function handleTouchMove(evt) {
       }
       await moveRight();
     } else {
-      if (!canMoveLeft()) {
-        setupInputOnce();
-        return;
-      }
-      await moveLeft();
+
     }
   } else {
     if ( yDiff > 0 ) {
