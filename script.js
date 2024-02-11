@@ -48,12 +48,17 @@ async function handleTouchMove(evt) {
         return;
       }
       await moveLeft();
+      const newTile = new Tile(gameBoard);
+      grid.getRandomEmptyCell().linkTile(newTile);
     } else {
       if (!canMoveRight()) {
         setupInputOnce();
         return;
       }
       await moveRight();
+
+      const newTile = new Tile(gameBoard);
+      grid.getRandomEmptyCell().linkTile(newTile);
 
     }
   } else {
@@ -64,6 +69,9 @@ async function handleTouchMove(evt) {
       }
       await moveUp();
 
+      const newTile = new Tile(gameBoard);
+      grid.getRandomEmptyCell().linkTile(newTile);
+
 
     } else {
       if (!canMoveDown()) {
@@ -71,11 +79,12 @@ async function handleTouchMove(evt) {
         return;
       }
       await moveDown();
-      
+      const newTile = new Tile(gameBoard);
+      grid.getRandomEmptyCell().linkTile(newTile);
+
     }
   }
-  const newTile = new Tile(gameBoard);
-  grid.getRandomEmptyCell().linkTile(newTile);
+
   /* reset values */
   xDown = null;
   yDown = null;
@@ -158,7 +167,7 @@ async function slideTiles(groupedCells) {
   });
 }
 
-function slideTilesInGroup(group, promises) {
+async function slideTilesInGroup(group, promises) {
   for (let i = 1; i < group.length; i++) {
     if (group[i].isEmpty()) {
       continue;
@@ -180,12 +189,12 @@ function slideTilesInGroup(group, promises) {
     promises.push(cellWithTile.linkedTile.waitForTransitionEnd());
 
     if (targetCell.isEmpty()) {
-      targetCell.linkTile(cellWithTile.linkedTile);
+      await targetCell.linkTile(cellWithTile.linkedTile);
     } else {
-      targetCell.linkTileForMerge(cellWithTile.linkedTile);
+      await targetCell.linkTileForMerge(cellWithTile.linkedTile);
     }
 
-    cellWithTile.unlinkTile();
+    await cellWithTile.unlinkTile();
   }
 }
 
