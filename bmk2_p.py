@@ -4,6 +4,8 @@ import aiohttp
 import pathlib
 from aiohttp.web_fileresponse import FileResponse
 from aiogram import Bot, Dispatcher, types
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types.web_app_info import WebAppInfo
 from aiogram.filters.command import Command
 
 # Включаем логирование, чтобы не пропустить важные сообщения
@@ -20,10 +22,8 @@ dir_p=pathlib.Path.cwd()
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
     await message.answer("Hello!")
-p1 = pathlib.Path(dir_p, "html", "snake.html")
-@dp.message(Command("zmey"))
-async def index(message: types.Message):
-    await message.answer("Hello!", reply_markup=types.InlineKeyboardButton(text="play, zmeya",web_app=types.web_app_info.WebAppInfo(url=p1)))
+
+
 
 
 # Запуск процесса поллинга новых апдейтов
