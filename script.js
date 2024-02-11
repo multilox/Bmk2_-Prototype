@@ -24,8 +24,8 @@ function getTouches(evt) {
       evt.originalEvent.touches;
 }
 
-async function handleTouchStart(evt) {
-  const firstTouch = await getTouches(evt)[0];
+function handleTouchStart(evt) {
+  const firstTouch =  getTouches(evt)[0];
   xDown = firstTouch.clientX;
   yDown = firstTouch.clientY;
 };
@@ -198,24 +198,24 @@ function slideTilesInGroup(group, promises) {
   }
 }
 
-function canMoveUp() {
-  return canMove(grid.cellsGroupedByColumn);
+async function canMoveUp() {
+  return await canMove(grid.cellsGroupedByColumn);
 }
 
-function canMoveDown() {
-  return canMove(grid.cellsGroupedByReversedColumn);
+async function canMoveDown() {
+  return await canMove(grid.cellsGroupedByReversedColumn);
 }
 
-function canMoveLeft() {
-  return canMove(grid.cellsGroupedByRow);
+async function canMoveLeft() {
+  return await canMove(grid.cellsGroupedByRow);
 }
 
-function canMoveRight() {
-  return canMove(grid.cellsGroupedByReversedRow);
+async function canMoveRight() {
+  return await canMove(grid.cellsGroupedByReversedRow);
 }
 
-function canMove(groupedCells) {
-  return groupedCells.some(group => canMoveInGroup(group));
+async function canMove(groupedCells) {
+  return await groupedCells.some(group => canMoveInGroup(group));
 }
 
 function canMoveInGroup(group) {
