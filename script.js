@@ -43,17 +43,17 @@ async function handleTouchMove(evt) {
 
   if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
     if ( xDiff > 0 ) {
-      if (!canMoveRight()) {
-        setupInputOnce();
-        return;
-      }
-      await moveRight();
-    } else {
       if (!canMoveLeft()) {
         setupInputOnce();
         return;
       }
       await moveLeft();
+    } else {
+      if (!canMoveRight()) {
+        setupInputOnce();
+        return;
+      }
+      await moveRight();
     }
   } else {
     if ( yDiff > 0 ) {
