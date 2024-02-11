@@ -13,63 +13,63 @@ function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
 }
 
-document.addEventListener('touchstart', handleTouchStart, false);
-document.addEventListener('touchmove', handleTouchMove, false);
+// document.addEventListener('touchstart', handleTouchStart, false);
+// document.addEventListener('touchmove', handleTouchMove, false);
+//
+// var xDown = null;
+// var yDown = null;
 
-var xDown = null;
-var yDown = null;
-
-function getTouches(evt) {
-  return evt.touches ||
-      evt.originalEvent.touches;
-}
-
-function handleTouchStart(evt) {
-  const firstTouch = getTouches(evt)[0];
-  xDown = firstTouch.clientX;
-  yDown = firstTouch.clientY;
-};
-
-async function handleTouchMove(evt) {
-  if ( ! xDown || ! yDown ) {
-    return;
-  }
-
-  var xUp = evt.touches[0].clientX;
-  var yUp = evt.touches[0].clientY;
-
-  var xDiff = xDown - xUp;
-  var yDiff = yDown - yUp;
-
-  if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
-    if ( xDiff > 0 ) {
-      if (!canMoveRight()) {
-        setupInputOnce();
-        return;
-      }
-      await moveRight();
-    } else {
-
-    }
-  } else {
-    if ( yDiff > 0 ) {
-      if (!canMoveDown()) {
-        setupInputOnce();
-        return;
-      }
-      await moveDown();
-    } else {
-      if (!canMoveUp()) {
-        setupInputOnce();
-        return;
-      }
-      await moveUp();
-    }
-  }
-  /* reset values */
-  xDown = null;
-  yDown = null;
-};
+// function getTouches(evt) {
+//   return evt.touches ||
+//       evt.originalEvent.touches;
+// }
+//
+// function handleTouchStart(evt) {
+//   const firstTouch = getTouches(evt)[0];
+//   xDown = firstTouch.clientX;
+//   yDown = firstTouch.clientY;
+// };
+//
+// async function handleTouchMove(evt) {
+//   if ( ! xDown || ! yDown ) {
+//     return;
+//   }
+//
+//   var xUp = evt.touches[0].clientX;
+//   var yUp = evt.touches[0].clientY;
+//
+//   var xDiff = xDown - xUp;
+//   var yDiff = yDown - yUp;
+//
+//   if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+//     if ( xDiff > 0 ) {
+//       if (!canMoveRight()) {
+//         setupInputOnce();
+//         return;
+//       }
+//       await moveRight();
+//     } else {
+//
+//     }
+//   } else {
+//     if ( yDiff > 0 ) {
+//       if (!canMoveDown()) {
+//         setupInputOnce();
+//         return;
+//       }
+//       await moveDown();
+//     } else {
+//       if (!canMoveUp()) {
+//         setupInputOnce();
+//         return;
+//       }
+//       await moveUp();
+//     }
+//   }
+//   /* reset values */
+//   xDown = null;
+//   yDown = null;
+// };
 
 
 async function handleInput(event) {
