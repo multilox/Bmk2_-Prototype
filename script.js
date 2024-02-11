@@ -24,8 +24,8 @@ function getTouches(evt) {
       evt.originalEvent.touches;
 }
 
-function handleTouchStart(evt) {
-  const firstTouch = getTouches(evt)[0];
+async function handleTouchStart(evt) {
+  const firstTouch = await getTouches(evt)[0];
   xDown = firstTouch.clientX;
   yDown = firstTouch.clientY;
 };
@@ -167,7 +167,7 @@ async function slideTiles(groupedCells) {
   });
 }
 
-async function slideTilesInGroup(group, promises) {
+function slideTilesInGroup(group, promises) {
   for (let i = 1; i < group.length; i++) {
     if (group[i].isEmpty()) {
       continue;
@@ -189,12 +189,12 @@ async function slideTilesInGroup(group, promises) {
     promises.push(cellWithTile.linkedTile.waitForTransitionEnd());
 
     if (targetCell.isEmpty()) {
-      await targetCell.linkTile(cellWithTile.linkedTile);
+      targetCell.linkTile(cellWithTile.linkedTile);
     } else {
-      await targetCell.linkTileForMerge(cellWithTile.linkedTile);
+      targetCell.linkTileForMerge(cellWithTile.linkedTile);
     }
 
-    await cellWithTile.unlinkTile();
+    cellWithTile.unlinkTile();
   }
 }
 
