@@ -4,7 +4,7 @@ import aiohttp
 import pathlib
 from aiohttp.web_fileresponse import FileResponse
 from aiogram import Bot, Dispatcher, types
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton,MenuButtonWebApp
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types.web_app_info import WebAppInfo
 from aiogram.filters.command import Command
 
@@ -17,20 +17,16 @@ dp = Dispatcher()
 
 dir_p=pathlib.Path.cwd()
 
-inline_btn_1 = InlineKeyboardButton("lox",))
-inline_kb1 = InlineKeyboardMarkup().add(inline_btn_1)
+
+
+buttons = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text='play', web_app=WebAppInfo(url="https://multilox.github.io/Bmk2_-Prototype/")),]]
+)
+
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.reply("Just a web app integrated withen telegram! 😀",
-                        reply_markup=inline_btn_1(
-                            [
-                                [
-                                    inline_btn_1(
-                                        "Open Web app 💥",
-                                        web_app=WebAppInfo(url="https://multilox.github.io/Bmk2_-Prototype/"))
-                                ]
-                            ]
-                        ))
+    await message.reply("2048",reply_markup=buttons)
 
 
 # Запуск процесса поллинга новых апдейтов
