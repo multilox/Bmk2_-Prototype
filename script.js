@@ -6,9 +6,9 @@ let tg      = window.Telegram;
 
 if(tg != undefined){
   if (tg.WebApp != undefined && tg.WebApp.initData != undefined){
-    while(true) {
+    
       tg.WebApp.expand();
-    }
+
   }
 }
 const gameBoard = document.getElementById("game-board");
