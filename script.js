@@ -9,7 +9,7 @@ if(tg != undefined){
 
     tg.WebApp.expand();
     tg.WebApp.isStateStable=true;
-
+    tg.WebApp.viewportStableHeight=true;
   }
 }
 const gameBoard = document.getElementById("game-board");
