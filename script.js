@@ -8,7 +8,7 @@ if(tg != undefined){
   if (tg.WebApp != undefined && tg.WebApp.initData != undefined){
 
     tg.WebApp.expand();
-    tg.WebApp.isStateStable=true;
+
   }
 }
 const gameBoard = document.getElementById("game-board");
