@@ -17,11 +17,11 @@ dp = Dispatcher()
 
 dir_p=pathlib.Path.cwd()
 
-
-# Хэндлер на команду /start
+inline_btn_1 = InlineKeyboardButton('play', web_app=WebAppInfo(url="https://multilox.github.io/Bmk2_-Prototype/"))
+inline_kb1 = InlineKeyboardMarkup().add(inline_btn_1)
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Hello!")
+    await message.answer("Hello!", reply_markup=kb.inline_kb1)
 
 
 
