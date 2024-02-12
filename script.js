@@ -9,6 +9,7 @@ if(tg != undefined){
 
     tg.WebApp.expand();
 
+
   }
 }
 const gameBoard = document.getElementById("game-board");
