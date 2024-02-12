@@ -11,86 +11,96 @@ setupInputOnce();
 
 function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
+
+  document.addEventListener('swiped', handleInput_S, { once: true },function (e) {
+    console.log(e.detail.dir); // swiped direction
+
+  });
 }
 
-document.addEventListener('touchstart', handleTouchStart, false);
-document.addEventListener('touchmove', handleTouchMove, false);
+// document.addEventListener('touchstart', handleTouchStart, false);
+// document.addEventListener('touchmove', handleTouchMove, false);
+//
+// var xDown = null;
+// var yDown = null;
+//
+// function getTouches(evt) {
+//   return evt.touches ||
+//       evt.originalEvent.touches;
+// }
+//
+// function handleTouchStart(evt) {
+//   const firstTouch =  getTouches(evt)[0];
+//   xDown = firstTouch.clientX;
+//   yDown = firstTouch.clientY;
+// };
+//
+// async function handleTouchMove(evt) {
+//   if ( ! xDown || ! yDown ) {
+//     return;
+//   }
+//
+//   var xUp = evt.touches[0].clientX;
+//   var yUp = evt.touches[0].clientY;
+//
+//   var xDiff = xDown - xUp;
+//   var yDiff = yDown - yUp;
+//
+//   if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+//     if ( xDiff > 0 ) {
+//       if (!canMoveLeft()) {
+//         setupInputOnce();
+//         return;
+//       } else {
+//         await moveLeft();
+//         const newTile = new Tile(gameBoard);
+//         await grid.getRandomEmptyCell().linkTile(newTile);
+//         return;
+//       }
+//     } else {
+//       if (!canMoveRight()) {
+//         setupInputOnce();
+//         return;
+//       }
+//       else{
+//         await moveRight();
+//         const newTile = new Tile(gameBoard);
+//         await grid.getRandomEmptyCell().linkTile(newTile);
+//         return;
+//         }
+//     }
+//   } else {
+//     if ( yDiff > 0 ) {
+//       if (!canMoveUp()) {
+//         setupInputOnce();
+//         return;
+//       }
+//     else {
+//         await moveUp();
+//         const newTile = new Tile(gameBoard);
+//         await grid.getRandomEmptyCell().linkTile(newTile);
+//         return;
+//       }
+//     } else {
+//       if (!canMoveDown()) {
+//         setupInputOnce();
+//         return;
+//       }
+//       else {
+//         await moveDown();
+//         const newTile = new Tile(gameBoard);
+//         await grid.getRandomEmptyCell().linkTile(newTile);
+//         return;
+//       }
+//     }
+//   }
+//
+//   /* reset values */
+//   xDown = null;
+//   yDown = null;
+//
+// };
 
-var xDown = null;
-var yDown = null;
-
-function getTouches(evt) {
-  return evt.touches ||
-      evt.originalEvent.touches;
-}
-
-function handleTouchStart(evt) {
-  const firstTouch =  getTouches(evt)[0];
-  xDown = firstTouch.clientX;
-  yDown = firstTouch.clientY;
-};
-
-async function handleTouchMove(evt) {
-  if ( ! xDown || ! yDown ) {
-    return;
-  }
-
-  var xUp = evt.touches[0].clientX;
-  var yUp = evt.touches[0].clientY;
-
-  var xDiff = xDown - xUp;
-  var yDiff = yDown - yUp;
-
-  if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
-    if ( xDiff > 0 ) {
-      if (!canMoveLeft()) {
-        setupInputOnce();
-        return;
-      }
-      await moveLeft();
-      const newTile = new Tile(gameBoard);
-      grid.getRandomEmptyCell().linkTile(newTile);
-    } else {
-      if (!canMoveRight()) {
-        setupInputOnce();
-        return;
-      }
-      await moveRight();
-
-      const newTile = new Tile(gameBoard);
-      grid.getRandomEmptyCell().linkTile(newTile);
-
-    }
-  } else {
-    if ( yDiff > 0 ) {
-      if (!canMoveUp()) {
-        setupInputOnce();
-        return;
-      }
-      await moveUp();
-
-      const newTile = new Tile(gameBoard);
-      grid.getRandomEmptyCell().linkTile(newTile);
-
-
-    } else {
-      if (!canMoveDown()) {
-        setupInputOnce();
-        return;
-      }
-      await moveDown();
-      const newTile = new Tile(gameBoard);
-      grid.getRandomEmptyCell().linkTile(newTile);
-
-    }
-  }
-
-  /* reset values */
-  xDown = null;
-  yDown = null;
-
-
-};
 
 
 async function handleInput(event) {
@@ -100,6 +110,7 @@ async function handleInput(event) {
         setupInputOnce();
         return;
       }
+
       await moveUp();
       break;
     case "ArrowDown":
@@ -117,6 +128,56 @@ async function handleInput(event) {
       await moveLeft();
       break;
     case "ArrowRight":
+      if (!canMoveRight()) {
+        setupInputOnce();
+        return;
+      }
+      await moveRight();
+      break;
+    default:
+      setupInputOnce();
+      return;
+  }
+
+  const newTile = new Tile(gameBoard);
+  grid.getRandomEmptyCell().linkTile(newTile);
+
+  if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+    await newTile.waitForAnimationEnd()
+    alert("Try again!")
+    return;
+  }
+
+  setupInputOnce();
+}
+
+
+
+async function handleInput_S(e) {
+  switch (e.detail.dir) {
+    case "up":
+      if (!canMoveUp()) {
+        setupInputOnce();
+        return;
+      }
+
+      await moveUp();
+      break;
+    case "down":
+      if (!canMoveDown()) {
+        setupInputOnce();
+        return;
+      }
+      await moveDown();
+      break;
+    case "left":
+      if (!canMoveLeft()) {
+        setupInputOnce();
+        return;
+      }
+      await moveLeft();
+      break;
+    case "right":
       if (!canMoveRight()) {
         setupInputOnce();
         return;
@@ -159,10 +220,10 @@ async function moveRight() {
 async function slideTiles(groupedCells) {
   const promises = [];
 
-  groupedCells.forEach(group => slideTilesInGroup(group, promises));
+  await groupedCells.forEach(group => slideTilesInGroup(group, promises));
 
   await Promise.all(promises);
-  grid.cells.forEach(cell => {
+  await grid.cells.forEach(cell => {
     cell.hasTileForMerge() && cell.mergeTiles()
   });
 }
@@ -198,24 +259,24 @@ function slideTilesInGroup(group, promises) {
   }
 }
 
-async function canMoveUp() {
-  return await canMove(grid.cellsGroupedByColumn);
+function canMoveUp() {
+  return  canMove(grid.cellsGroupedByColumn);
 }
 
-async function canMoveDown() {
-  return await canMove(grid.cellsGroupedByReversedColumn);
+function canMoveDown() {
+  return  canMove(grid.cellsGroupedByReversedColumn);
 }
 
-async function canMoveLeft() {
-  return await canMove(grid.cellsGroupedByRow);
+function canMoveLeft() {
+  return  canMove(grid.cellsGroupedByRow);
 }
 
-async function canMoveRight() {
-  return await canMove(grid.cellsGroupedByReversedRow);
+function canMoveRight() {
+  return  canMove(grid.cellsGroupedByReversedRow);
 }
 
-async function canMove(groupedCells) {
-  return await groupedCells.some(group => canMoveInGroup(group));
+function canMove(groupedCells) {
+  return  groupedCells.some(group => canMoveInGroup(group));
 }
 
 function canMoveInGroup(group) {
