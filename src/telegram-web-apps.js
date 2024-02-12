@@ -427,7 +427,7 @@
         throw Error('WebAppCallbackIdGenerateFailed');
     }
 
-    var viewportHeight = false, viewportStableHeight = true, isExpanded = true;
+    var viewportHeight = false, viewportStableHeight = false, isExpanded = true;
     function setViewportHeight(data) {
         if (typeof data !== 'undefined') {
             isExpanded = !!data.is_expanded;
