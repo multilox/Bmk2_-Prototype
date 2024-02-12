@@ -2,14 +2,7 @@ import { Grid } from "./grid.js";
 import { Tile } from "./tile.js";
 
 
-new Viewport({
-  height: 630,
-  width: 400,
-  stableHeight: 630,
-  isExpanded: true,
-  stability: true,
 
-});
 const gameBoard = document.getElementById("game-board");
 
 const grid = new Grid(gameBoard);
