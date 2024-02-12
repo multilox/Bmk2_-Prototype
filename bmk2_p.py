@@ -8,11 +8,11 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types.web_app_info import WebAppInfo
 from aiogram.filters.command import Command
 
-# Включаем логирование, чтобы не пропустить важные сообщения
+
 logging.basicConfig(level=logging.INFO)
-# Объект бота
+
 bot = Bot(token="6966357812:AAGDjuKpIqSxY0oCXcd5GM8YFNsOdDefq5g")
-# Диспетчер
+
 dp = Dispatcher()
 
 dir_p=pathlib.Path.cwd()
