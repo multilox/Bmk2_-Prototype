@@ -2,7 +2,15 @@ import { Grid } from "./grid.js";
 import { Tile } from "./tile.js";
 
 
+let tg      = window.Telegram;
 
+if(tg != undefined){
+  if (tg.WebApp != undefined && tg.WebApp.initData != undefined){
+
+    tg.WebApp.expand();
+
+  }
+}
 const gameBoard = document.getElementById("game-board");
 
 const grid = new Grid(gameBoard);
