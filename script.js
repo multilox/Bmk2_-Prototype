@@ -3,10 +3,10 @@ import { Tile } from "./tile.js";
 import { Viewport, postEvent } from '@tma.js/sdk';
 
 new Viewport({
-  // height: 630,
-  // width: 400,
-  // stableHeight: 630,
-  // isExpanded: false,
+  height: 630,
+  width: 400,
+  stableHeight: 630,
+  isExpanded: true,
   stability: true,
 
 });
