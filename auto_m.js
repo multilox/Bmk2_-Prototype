@@ -25,11 +25,13 @@ function updateNews() {
 
     // Очищаем текущий контент в блоке новостей
     newsContainer.innerHTML = "";
+    newsContainer.classList.add("news-container"); // Добавляем класс для стилизации и прокрутки
 
     getPostTextAndImages(TOKEN_USER, VERSION, DOMAIN)
         .then(data => {
             const items = data.response.items;
             items.forEach(post => {
+
                 const text = post.text;
                 const attachments = post.attachments || [];
                 const images = attachments
