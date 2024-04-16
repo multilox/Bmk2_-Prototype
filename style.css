@@ -1,58 +1,73 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import url('https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Slab:100,100i,300,300i,400,400i,600,600i,700,700i');
+
+:root{
+    --bg: #001D66;
+    --title: #00257F;
+    --para-text: rgba(0,0,0,0.67);
+    --title-font: 'Josefin Slab', serif;
+    --text-font: 'PT Serif', Serif;
+    --width: 20em;
+}
+body{
+    background: var(--bg);
+    display: grid;
+    place-items: center;
 }
 
-body {
-  background-color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-
+h1, h2, h3, h4, h5, h6{
+    color: var(--title);
+    text-transform: capitalize;
+    font-family: var(--title-font);
 }
 
-#game-board {
-  --cell-size: 20vmin;
-  --cell-gap: 2vmin;
-
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, var(--cell-size));
-  grid-template-rows: repeat(4, var(--cell-size));
-  gap: var(--cell-gap);
-  border-radius: 1vmin;
+section,
+aside,
+article,
+div,
+img{
+    box-sizing: border-box;
+}
+section img{
+    width: 100%;
+}
+section{
+    width: var(--width);
+    background: #fff;
+    padding: 20px;
+}
+section h3{
+    font-size: calc(var(--width)/10);
+}
+section p{
+    font-family: var(--text-font);
+    color: var(--para-text);
+    font-size: calc(var(--width)/20);
+}
+.date{
+    font-size: calc(var(--width)/25);
+}
+h1{
+    color: #fff;
 }
 
-.cell {
-  background-color: #444;
-  border-radius: 1vmin;
+section a{
+    text-decoration: none;
+    color: var(--bg);
+    font-family: var(--title-font);
+    font-weight: 700;
+    font-size: calc(var(--width)/23);
+}
+.news-item {
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.tile {
-  position: absolute;
-  top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)));
-  left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: var(--cell-size);
-  height: var(--cell-size);
-  border-radius: 1vmin;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 7.5vmin;
-  font-weight: bold;
-  background-color: hsl(25, 60%, var(--bg-lightness));
-  color: hsl(20, 25%, var(--text-lightness));
-  animation: show 200ms;
-  transition: 100ms;
-}
-
-@keyframes show {
-  0% {
-    opacity: 0.5;
-    transform: scale(0);
-  }
+.news-text {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
 }
