@@ -59,7 +59,7 @@ section a{
     font-size: calc(var(--width)/23);
 }
 .news-container {
-    max-height: 500px; /* Высота блока, при которой появляется прокрутка */
+
     overflow-y: auto; /* Включаем вертикальную прокрутку */
 }
 
