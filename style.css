@@ -11,8 +11,12 @@
 }
 body{
     background: var(--bg);
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: auto;
+
 }
 
 h1, h2, h3, h4, h5, h6{
