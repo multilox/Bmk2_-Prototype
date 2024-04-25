@@ -17,7 +17,8 @@ function getPostTextAndImages(token, version, domain) {
         document.body.appendChild(script);
     });
 }
-
+window.Telegram.WebApp.ready();
+window.Telegram.WebApp.expand();
 
 
 function updateNews() {
